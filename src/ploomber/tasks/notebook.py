@@ -430,7 +430,7 @@ class NotebookRunner(FileLoaderMixin, Task):
         name_new = name.replace(suffix, '-tmp.ipynb')
         tmp = self.source.loc.with_name(name_new)
         content = nbformat.writes(nb, version=nbformat.NO_CONVERT)
-        tmp.write_text(content)
+        tmp.write_text(content, encoding='utf-8')
 
         # open notebook with injected debugging cell
         try:
@@ -500,7 +500,7 @@ class NotebookRunner(FileLoaderMixin, Task):
         fd, tmp_path = tempfile.mkstemp(suffix='.py')
         os.close(fd)
         code = jupytext.writes(nb, version=nbformat.NO_CONVERT, fmt='py')
-        Path(tmp_path).write_text(code)
+        Path(tmp_path).write_text(code, encoding='utf-8')
 
         if kind == 'pm':
             # post-mortem debugging
@@ -548,7 +548,7 @@ class NotebookRunner(FileLoaderMixin, Task):
         os.close(fd)
 
         tmp = Path(tmp)
-        tmp.write_text(self.source.nb_str_rendered)
+        tmp.write_text(self.source.nb_str_rendered, encoding='utf-8')
 
         if self.local_execution:
             self.papermill_params['cwd'] = str(self.source.loc.parent)
