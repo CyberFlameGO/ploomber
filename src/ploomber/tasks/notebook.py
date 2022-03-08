@@ -192,7 +192,7 @@ class NotebookConverter:
         content, _ = nbconvert.export(exporter, nb, **nbconvert_export_kwargs)
 
         if isinstance(content, str):
-            path.write_text(content)
+            path.write_text(content, encoding='utf-8')
         elif isinstance(content, bytes):
             path.write_bytes(content)
         else:

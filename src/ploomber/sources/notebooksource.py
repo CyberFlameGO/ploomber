@@ -185,7 +185,7 @@ class NotebookSource(Source):
                     'File does not exist.' +
                     _suggest_ploomber_scaffold_missing_file())
 
-            self._primitive = primitive.read_text()
+            self._primitive = primitive.read_text(encoding='utf-8')
         else:
             raise TypeError('Notebooks must be initialized from strings, '
                             'Placeholder or pathlib.Path, got {}'.format(
